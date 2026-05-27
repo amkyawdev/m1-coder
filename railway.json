@@ -1,17 +1,14 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "nixpacks": {
-      "planPath": "backend/requirements.txt",
-      "installCmd": "pip install -r requirements.txt"
-    }
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "backend/Dockerfile"
   },
   "deploy": {
     "numReplicas": 1,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10,
-    "startCommand": "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    "startCommand": "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   },
   "env": {
     "OPENROUTER_API_KEY": {
@@ -24,6 +21,6 @@
       "required": false
     }
   },
-  "regions": ["us-east-1", "eu-west-1", "ap-southeast-1"],
+  "regions": ["us-east-1"],
   "idleTimeout": 300
 }
