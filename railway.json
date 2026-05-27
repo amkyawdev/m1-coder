@@ -1,0 +1,29 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "nixpacks": {
+      "planPath": "backend/requirements.txt",
+      "installCmd": "pip install -r requirements.txt"
+    }
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10,
+    "startCommand": "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+  },
+  "env": {
+    "OPENROUTER_API_KEY": {
+      "description": "Your OpenRouter API key for AI model access",
+      "required": true,
+      "generator": "secret"
+    },
+    "FIREBASE_CREDENTIALS": {
+      "description": "Firebase service account credentials (JSON string)",
+      "required": false
+    }
+  },
+  "regions": ["us-east-1", "eu-west-1", "ap-southeast-1"],
+  "idleTimeout": 300
+}

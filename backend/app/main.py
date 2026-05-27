@@ -1,13 +1,28 @@
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Optional, List
+from contextlib import asynccontextmanager
 import httpx
 import os
 
 from .config import settings
 
-app = FastAPI(title="AMK AI Backend")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("🚀 M1-Coder API starting up...")
+    yield
+    # Shutdown
+    print("👋 M1-Coder API shutting down...")
+
+app = FastAPI(
+    title="M1-Coder API",
+    description="AI-Powered Coding Assistant Backend",
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 app.add_middleware(
     CORSMiddleware,

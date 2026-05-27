@@ -207,11 +207,22 @@ npx vercel --prod
 
 ### Railway (Backend)
 
-1. Create new Railway project
-2. Connect GitHub repository
-3. Set root directory to `backend`
-4. Add `OPENROUTER_API_KEY` environment variable
-5. Deploy
+1. Go to [railway.app](https://railway.app) and sign in
+2. Click **New Project** → **Deploy from GitHub**
+3. Select `amkyawdev/m1-coder` repository
+4. Set root directory to `backend`
+5. Add environment variables:
+   - `OPENROUTER_API_KEY` (required)
+   - `PORT` = `8000`
+6. Railway will auto-detect Python and install dependencies
+7. Deploy! Your API will be live at `https://your-project.railway.app`
+
+```bash
+# Or use CLI
+railway login
+railway init
+railway up --detach
+```
 
 ---
 
