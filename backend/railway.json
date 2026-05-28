@@ -2,24 +2,13 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "watchPatterns": [
-      "/backend"
-    ],
-    "dockerfilePath": "backend/Dockerfile",
-    "buildEnvironment": "V3"
+    "dockerfilePath": "backend/Dockerfile"
   },
   "deploy": {
     "runtime": "V2",
     "numReplicas": 1,
     "startCommand": "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT",
     "sleepApplication": true,
-    "useLegacyStacker": false,
-    "ipv6EgressEnabled": true,
-    "multiRegionConfig": {
-      "asia-southeast1-eqsg3a": {
-        "numReplicas": 1
-      }
-    },
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   },
@@ -28,12 +17,6 @@
       "description": "Your OpenRouter API key for AI model access",
       "required": true,
       "generator": "secret"
-    },
-    "FIREBASE_CREDENTIALS": {
-      "description": "Firebase service account credentials (JSON string)",
-      "required": false
     }
-  },
-  "regions": ["us-east-1"],
-  "idleTimeout": 300
+  }
 }
