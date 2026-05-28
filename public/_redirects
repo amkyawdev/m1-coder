@@ -1,0 +1,2 @@
+/* Path: frontend/public/_redirects */
+https://m1-coder.vercel.app/* /:splat 200
